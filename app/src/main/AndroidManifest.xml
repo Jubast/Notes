@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.jubast.notes">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/icon_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Jubast.Theme.Notes.Base"
+        tools:ignore="GoogleAppIndexingWarning">
+        <!-- Activities -->
+
+        <activity
+            android:name=".activities.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Jubast.Theme.Notes.Base">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activities.SettingsActivity" />
+        <activity android:name=".activities.NoteTypeActivity" />
+        <activity android:name=".activities.NoteTypeNameActivity" />
+        <activity android:name=".activities.NoteActivity" />
+        <!--<activity
+            android:name=".activities.NoteTypeNameActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Jubast.Theme.Notes.NoTopBar.Transparent"
+            android:windowSoftInputMode="stateVisible" /> &lt;!&ndash; END &ndash;&gt;
+        <receiver android:name=".NotesWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/notes_widget_activity_info" />
+        </receiver>-->
+
+        <service
+            android:name=".ListService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+
+    </application>
+
+</manifest>

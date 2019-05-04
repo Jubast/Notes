@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Notes</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="example">EXAMPLE</string>
+    <!-- Not used cuz custom class for strings
+    <string name="add">ADD</string>
+    <string name="edit">EDIT</string>
+    <string name="save">SAVE</string>
+    <string name="remove">REMOVE</string>
+    <string name="TYPES">NOTES TYPES</string>
+    <string name="typeName">Enter the type name:</string>
+    <string name="typeExists">Type already exists!</string>
+    <string name="typeAdded">Type successfully added!</string>
+    <string name="yourNotes">Your notes:</string>
+    <string name="language">Set the language:</string> -->
+</resources>

@@ -1,0 +1,36 @@
+<resources>
+    <style name="Jubast.Theme.Notes.Base" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- https://developer.android.com/guide/topics/ui/look-and-feel/themes -->
+
+        <!--   color for the app bar and other primary UI elements -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <!--   a secondary color for controls like checkboxes and name fields -->
+        <item name="colorAccent">@color/colorAccent</item>
+        <!-- Status bar color (notifications, time, battery)-->
+        <item name="colorPrimaryDark">@color/dark_yellow</item>
+        <item name="android:windowBackground">@color/light_yellow</item>
+
+        <item name="buttonStyle">@style/Jubast.Theme.Notes.ButtonTheme</item>
+        <item name="imageButtonStyle">@style/Jubast.Theme.Notes.ImageButtonTheme</item>
+    </style>
+
+    <style name="Jubast.Theme.Notes.NoTopBar.Transparent" parent="Jubast.Theme.Notes.Base">
+        <!-- Transparent activity with no TopBar -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/light_yellow_90</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+
+
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
+    <style name="Jubast.Theme.Notes.ButtonTheme" parent="Widget.AppCompat.Button">
+        <item name="android:backgroundTint">@color/transparent</item>
+        <item name="android:textColor">@color/pencil</item>
+    </style>
+
+    <style name="Jubast.Theme.Notes.ImageButtonTheme" parent="Widget.AppCompat.ImageButton">
+        <item name="android:backgroundTint">@color/transparent</item>
+    </style>
+</resources>

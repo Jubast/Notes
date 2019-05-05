@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
-    android:initialKeyguardLayout="@layout/notes_widget"
-    android:initialLayout="@layout/notes_widget"
+    android:initialKeyguardLayout="@layout/widget_notes"
+    android:initialLayout="@layout/widget_notes"
     android:minHeight="110dp"
     android:minWidth="110dp"
     android:previewImage="@drawable/notes_preview"

@@ -75,7 +75,7 @@ class SettingsActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
             appLangs.add(it.name)
         }
 
-        ArrayAdapter(this, R.layout.settings_spiner_item, appLangs).also {
+        ArrayAdapter(this, R.layout.activity_settings_spiner_item, appLangs).also {
             it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             sLanguage.adapter = it
         }

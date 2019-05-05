@@ -6,11 +6,12 @@ import android.graphics.Paint
 import android.os.Bundle
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
+import com.jubast.notes.virtualactors.Note
+import com.jubast.notes.virtualactors.NoteType
+import com.jubast.notes.virtualactors.exceptions.InvalidOperationException
 
-class ListFactory(context: Context, intent: Intent) : RemoteViewsService.RemoteViewsFactory {
-    private val _context: Context = context
-    private val _intent: Intent = intent
-    private val _items: MutableList<Item> = mutableListOf()
+class ListFactory(val context: Context, val intent: Intent) : RemoteViewsService.RemoteViewsFactory {
+    private val _noteIds: MutableList<String> = mutableListOf()
 
     override fun onCreate() {
         updateItems()
@@ -33,21 +34,22 @@ class ListFactory(context: Context, intent: Intent) : RemoteViewsService.RemoteV
     }
 
     override fun getViewAt(position: Int): RemoteViews {
-        val item = _items[position]
+        val noteId = _noteIds[position]
+        val note = Note(noteId, context)
 
-        val views = RemoteViews(_context.packageName, R.layout.list_view_item)
-        views.setTextViewText(R.id.text, item.toString())
+        val views = RemoteViews(context.packageName, R.layout.widget_note_layout)
+        views.setTextViewText(R.id.text, note.state.text)
 
-        if(item.checked){
+        if(note.state.checked){
             views.setInt(R.id.text, "setPaintFlags", Paint.STRIKE_THRU_TEXT_FLAG)
         }
         else{
             views.setInt(R.id.text, "setPaintFlags", Paint.ANTI_ALIAS_FLAG)
         }
 
-        // Send a toString() of the current item as extra data in the Intent
+        // Send note id
         val extras = Bundle()
-        extras.putString(NotesWidgetProvider.TEXT_CHECK, item.toIdentifyString())
+        extras.putString(NoteSettings.NOTE_ID, noteId)
 
         val intent = Intent()
         intent.putExtras(extras)
@@ -59,7 +61,7 @@ class ListFactory(context: Context, intent: Intent) : RemoteViewsService.RemoteV
     }
 
     override fun getCount(): Int {
-        return _items.size
+        return _noteIds.size
     }
 
     override fun getViewTypeCount(): Int {
@@ -67,13 +69,14 @@ class ListFactory(context: Context, intent: Intent) : RemoteViewsService.RemoteV
     }
 
     override fun onDestroy() {
-        _items.clear()
+        _noteIds.clear()
     }
 
     private fun updateItems(){
-        val updater = DBHelperOLD(_context)
-        val items = updater.getItems()
-        _items.clear()
-        _items.addAll(items)
+        val noteTypeId = intent.extras?.getString(NoteSettings.NOTE_TYPE_ID, null)
+                ?: throw InvalidOperationException("Note type id is required")
+        val notes= NoteType(noteTypeId, context).state.notes
+        _noteIds.clear()
+        _noteIds.addAll(notes)
     }
 }

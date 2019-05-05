@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.jubast.notes.AppStrings
 import com.jubast.notes.NoteSettings
+import com.jubast.notes.NotesWidgetProvider
 import com.jubast.notes.R
 import com.jubast.notes.virtualactors.AppLanguage
 import com.jubast.notes.virtualactors.NoteType
@@ -53,6 +54,7 @@ class NoteTypeNameActivity : AppCompatActivity() {
             }
 
             setResult(Activity.RESULT_OK)
+            NotesWidgetProvider.updateWidgets(this)
             finish()
         }
 

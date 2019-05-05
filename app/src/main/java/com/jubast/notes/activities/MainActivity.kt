@@ -9,7 +9,7 @@ import com.jubast.notes.virtualactors.AppLanguage
 import com.jubast.notes.virtualactors.NoteTypeManager
 import com.jubast.notes.virtualactors.NoteType
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.note_type_edit.view.*
+import kotlinx.android.synthetic.main.app_note_type_layout.view.*
 
 class MainActivity : AppCompatActivity(){
 
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity(){
         {
             val noteType = NoteType(noteTypeId, this).state
 
-            val view: View = layoutInflater.inflate(R.layout.note_type_edit, linearLayoutTypes, false)
+            val view: View = layoutInflater.inflate(R.layout.app_note_type_layout, linearLayoutTypes, false)
             view.twText.text = noteType.name
             view.tag = noteTypeId
 
@@ -76,6 +76,7 @@ class MainActivity : AppCompatActivity(){
         if(requestCode == NoteSettings.UPDATE_NOTE_TYPE || requestCode == NoteSettings.UPDATE_SETTINGS)
         {
             loadNoteTypes()
+            NotesWidgetProvider.updateWidgets(this)
         }
     }
 }

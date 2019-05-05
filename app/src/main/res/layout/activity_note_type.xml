@@ -43,7 +43,7 @@
     <TextView
         android:id="@+id/twNoteType"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="35dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
@@ -51,7 +51,8 @@
         android:textSize="20sp" />
 
     <LinearLayout
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="15dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal">
@@ -85,14 +86,24 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="15dp"
         android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/sWidgetId"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="match_parent"
+            android:spinnerMode="dropdown"/>
 
         <View
             android:layout_height="match_parent"
             android:layout_width="0dp"
-            android:layout_weight="6" />
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/btnAdd"

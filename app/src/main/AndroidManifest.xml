@@ -24,15 +24,14 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.SettingsActivity" />
-        <activity android:name=".activities.NoteTypeActivity" />
-        <activity android:name=".activities.NoteTypeNameActivity" />
-        <activity android:name=".activities.NoteActivity" />
-        <!--<activity
-            android:name=".activities.NoteTypeNameActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Jubast.Theme.Notes.NoTopBar.Transparent"
-            android:windowSoftInputMode="stateVisible" /> &lt;!&ndash; END &ndash;&gt;
+        <activity android:name=".activities.SettingsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.NoteTypeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.NoteTypeNameActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.NoteActivity"
+            android:screenOrientation="portrait"/>
         <receiver android:name=".NotesWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -41,13 +40,20 @@
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/notes_widget_activity_info" />
-        </receiver>-->
+        </receiver>
 
         <service
-            android:name=".ListService"
+            android:name=".ListService1"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
-
-
+        <service
+            android:name=".ListService2"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+        <service
+            android:name=".ListService3"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+        <service
+            android:name=".ListService4"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
     </application>
 
 </manifest>

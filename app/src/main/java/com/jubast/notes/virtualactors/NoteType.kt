@@ -2,6 +2,7 @@ package com.jubast.notes.virtualactors
 
 import android.content.Context
 import com.jubast.notes.containers.NoteTypeState
+import com.jubast.notes.virtualactors.abstract.StateActor
 import com.jubast.notes.virtualactors.exceptions.InvalidOperationException
 import java.util.*
 
@@ -40,6 +41,15 @@ class NoteType(actorId: String, context: Context) : StateActor<NoteTypeState>(ac
         }
 
         state.notes.add(noteId)
+        saveState()
+    }
+
+    fun addNote(noteId: String) {
+        if(!state.generated) throw InvalidOperationException("NoteType '$actorId' not generated")
+
+        if(!state.notes.contains(noteId))
+            state.notes.add(noteId)
+
         saveState()
     }
 

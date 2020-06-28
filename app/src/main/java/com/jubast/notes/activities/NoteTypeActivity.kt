@@ -33,8 +33,8 @@ class NoteTypeActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
 
         var selectedWidgetIndex :Int? = null
         val widgets = mutableListOf("None")
-        for ((index, widgetId) in NoteWidgetManager(this).state.widgets.withIndex()){
-            if (NoteWidget(widgetId, this).state.noteTypeId.contentEquals(_noteTypeId)) {
+        for ((index, widgetId) in NoteWidgetManager(this).getActorState().widgets.withIndex()){
+            if (NoteWidget(widgetId, this).getActorState().noteTypeId.contentEquals(_noteTypeId)) {
                 selectedWidgetIndex = index + 1 // + 1 because of "None" at index 0
             }
             widgets.add(widgetId)
@@ -58,13 +58,13 @@ class NoteTypeActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
 
         val noteType = NoteType(_noteTypeId, this)
         twNoteType.text = _appStrings.typeName
-        twNoteTypeName.text = noteType.state.name
+        twNoteTypeName.text = noteType.getActorState().name
 
         linearLayoutNotes.removeAllViews()
-        for (noteId in noteType.state.notes) {
+        for (noteId in noteType.getActorState().notes) {
             val note = Note(noteId, this)
             val view: View = layoutInflater.inflate(R.layout.app_note_type_layout, linearLayoutNotes, false)
-            view.twText.text = note.state.text
+            view.twText.text = note.getActorState().text
             view.twText.setOnClickListener {
                 val intent = Intent(this, NoteActivity::class.java)
                 intent.putExtra(NoteSettings.NOTE_TYPE_ID, _noteTypeId)
@@ -113,9 +113,9 @@ class NoteTypeActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
     override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
         val selectedWidgetId = parent.getItemAtPosition(position) as String
 
-        for (widgetId in NoteWidgetManager(this).state.widgets) {
+        for (widgetId in NoteWidgetManager(this).getActorState().widgets) {
             val widget = NoteWidget(widgetId, this)
-            if(widget.state.noteTypeId == _noteTypeId){
+            if(widget.getActorState().noteTypeId == _noteTypeId){
                 widget.setNoteTypeId("")
             }
         }

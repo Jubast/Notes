@@ -1,19 +1,24 @@
 package com.jubast.notes.activities
 
+import android.R.attr.label
 import android.app.AlarmManager
 import android.app.PendingIntent
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
+import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.jubast.notes.AppStrings
 import com.jubast.notes.R
 import com.jubast.notes.virtualactors.AppLanguage
+import com.jubast.notes.virtualactors.NoteTypeManager
 import kotlinx.android.synthetic.main.activity_settings.*
+
 
 class SettingsActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -23,7 +28,7 @@ class SettingsActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
     override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
         val item = parent.getItemAtPosition(position) as String
         val appLang = AppLanguage(this)
-        if (appLang.state.language.contentEquals(item)) {
+        if (appLang.getActorState().language.contentEquals(item)) {
             return
         }
         appLang.setLanguage(item)
@@ -66,6 +71,12 @@ class SettingsActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
 
     private fun setText(appStrings: AppStrings) {
         twLanguage.text = appStrings.language
+
+        twExport.text = appStrings.export
+        btnExport.text = appStrings.exportMsg
+
+        twImport.text = appStrings.import
+        btnImport.text = appStrings.importMsg
     }
 
     private fun setSpinnerArrayAdapter()
@@ -85,7 +96,7 @@ class SettingsActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
     // so if English is selected, it puts English as the selected item
     private fun setPositionOfSavedLanguage()
     {
-        val lang = AppLanguage(this).state.language
+        val lang = AppLanguage(this).getActorState().language
         var i: Int = 0
         while (i < sLanguage.count)
         {
@@ -102,5 +113,21 @@ class SettingsActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
     private fun setListeners()
     {
         sLanguage.onItemSelectedListener = this
+
+        btnExport.setOnClickListener {
+            val manager = NoteTypeManager(this)
+            val json = manager.exportJson()
+
+            val clipboardManager =  getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager;
+            val clip = ClipData.newPlainText("notes export", json)
+            clipboardManager.primaryClip = clip
+        }
+
+        btnImport.setOnClickListener {
+            val json = twNotesImport.text.toString()
+
+            val manager = NoteTypeManager(this)
+            manager.importJson(json)
+        }
     }
 }

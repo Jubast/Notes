@@ -2,6 +2,7 @@ package com.jubast.notes.virtualactors
 
 import android.content.Context
 import com.jubast.notes.containers.NoteWidgetManagerState
+import com.jubast.notes.virtualactors.abstract.StateActor
 
 class NoteWidgetManager(context: Context): StateActor<NoteWidgetManagerState>(".", context, ::NoteWidgetManagerState) {
     fun updateWidgets(appWidgetIds: IntArray){
@@ -24,7 +25,7 @@ class NoteWidgetManager(context: Context): StateActor<NoteWidgetManagerState>(".
 
         for (widgetId in stringAppWidgetIds){
             val widget = NoteWidget(widgetId, context)
-            if (!widget.state.generated) {
+            if (!widget.getActorState().generated) {
                 widget.generate()
                 state.widgets.add(widgetId)
             }

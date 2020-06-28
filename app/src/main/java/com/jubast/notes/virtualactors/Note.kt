@@ -1,7 +1,9 @@
 package com.jubast.notes.virtualactors
 
 import android.content.Context
+import com.google.gson.Gson
 import com.jubast.notes.containers.NoteState
+import com.jubast.notes.virtualactors.abstract.StateActor
 import com.jubast.notes.virtualactors.exceptions.InvalidOperationException
 
 class Note(actorId: String, context: Context) : StateActor<NoteState>(actorId, context, ::NoteState) {

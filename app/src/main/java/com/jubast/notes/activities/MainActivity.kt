@@ -35,10 +35,10 @@ class MainActivity : AppCompatActivity(){
     {
         linearLayoutTypes.removeAllViews()
         val manager = NoteTypeManager(this)
-        val noteTypeIds: MutableList<String> = manager.state.noteTypes
+        val noteTypeIds: MutableList<String> = manager.getActorState().noteTypes
         for (noteTypeId: String in noteTypeIds)
         {
-            val noteType = NoteType(noteTypeId, this).state
+            val noteType = NoteType(noteTypeId, this).getActorState()
 
             val view: View = layoutInflater.inflate(R.layout.app_note_type_layout, linearLayoutTypes, false)
             view.twText.text = noteType.name

@@ -38,9 +38,9 @@ class ListFactory(val context: Context, val intent: Intent) : RemoteViewsService
         val note = Note(noteId, context)
 
         val views = RemoteViews(context.packageName, R.layout.widget_note_layout)
-        views.setTextViewText(R.id.text, note.state.text)
+        views.setTextViewText(R.id.text, note.getActorState().text)
 
-        if(note.state.checked){
+        if(note.getActorState().checked){
             views.setInt(R.id.text, "setPaintFlags", Paint.STRIKE_THRU_TEXT_FLAG)
         }
         else{
@@ -75,7 +75,7 @@ class ListFactory(val context: Context, val intent: Intent) : RemoteViewsService
     private fun updateItems(){
         val noteTypeId = intent.extras?.getString(NoteSettings.NOTE_TYPE_ID, null)
                 ?: throw InvalidOperationException("Note type id is required")
-        val notes= NoteType(noteTypeId, context).state.notes
+        val notes= NoteType(noteTypeId, context).getActorState().notes
         _noteIds.clear()
         _noteIds.addAll(notes)
     }

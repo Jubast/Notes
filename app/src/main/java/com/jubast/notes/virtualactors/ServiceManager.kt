@@ -2,6 +2,7 @@ package com.jubast.notes.virtualactors
 
 import android.content.Context
 import com.jubast.notes.containers.ServiceManagerState
+import com.jubast.notes.virtualactors.abstract.StateActor
 
 class ServiceManager(context: Context): StateActor<ServiceManagerState>(".", context, ::ServiceManagerState) {
     fun updateServices(appWidgetIds: IntArray){

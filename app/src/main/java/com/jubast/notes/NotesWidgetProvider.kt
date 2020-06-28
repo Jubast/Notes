@@ -56,7 +56,7 @@ class NotesWidgetProvider : AppWidgetProvider() {
             NoteSettings.UPDATE_NOTE_CHECKED -> {
                 val noteId = intent.extras?.getString(NoteSettings.NOTE_ID)
                 if(noteId != null){
-                    Note(noteId, context).also {it.setChecked(!it.state.checked)}
+                    Note(noteId, context).also {it.setChecked(!it.getActorState().checked)}
                     updateWidgets(context)
                 }
             }
@@ -77,7 +77,7 @@ class NotesWidgetProvider : AppWidgetProvider() {
         // Construct the RemoteViews object
         val views = RemoteViews(context.packageName, R.layout.widget_notes)
 
-        val noteTypeId = NoteWidget(appWidgetId.toString(), context).state.noteTypeId
+        val noteTypeId = NoteWidget(appWidgetId.toString(), context).getActorState().noteTypeId
 
         // if widget has no NoteType reference don't do anything
         if(noteTypeId.isEmpty()){
@@ -88,7 +88,7 @@ class NotesWidgetProvider : AppWidgetProvider() {
 
         val noteType = NoteType(noteTypeId, context)
 
-        views.setTextViewText(R.id.twNoteTypeName, noteType.state.name)
+        views.setTextViewText(R.id.twNoteTypeName, noteType.getActorState().name)
 
         // OnClick for Opening the Application
         val appIntent = Intent(context, NoteTypeActivity::class.java)
@@ -101,16 +101,16 @@ class NotesWidgetProvider : AppWidgetProvider() {
         val serviceManager = ServiceManager(context)
         // if appWidgetId exists
         when(appWidgetId.toString()){
-            serviceManager.state.service1Used -> {
+            serviceManager.getActorState().service1Used -> {
                 type = ListService1::class.java
             }
-            serviceManager.state.service2Used -> {
+            serviceManager.getActorState().service2Used -> {
                 type = ListService2::class.java
             }
-            serviceManager.state.service3Used -> {
+            serviceManager.getActorState().service3Used -> {
                 type = ListService3::class.java
             }
-            serviceManager.state.service4Used -> {
+            serviceManager.getActorState().service4Used -> {
                 type = ListService4::class.java
             }
         }
@@ -118,24 +118,24 @@ class NotesWidgetProvider : AppWidgetProvider() {
         // add new appWidgetId
         if(type == null){
             when{
-                serviceManager.state.service1Used.isEmpty() -> {
+                serviceManager.getActorState().service1Used.isEmpty() -> {
                     type = ListService1::class.java
-                    serviceManager.state.service1Used = appWidgetId.toString()
+                    serviceManager.getActorState().service1Used = appWidgetId.toString()
                     serviceManager.stateChanged()
                 }
-                serviceManager.state.service2Used.isEmpty() -> {
+                serviceManager.getActorState().service2Used.isEmpty() -> {
                     type = ListService2::class.java
-                    serviceManager.state.service2Used = appWidgetId.toString()
+                    serviceManager.getActorState().service2Used = appWidgetId.toString()
                     serviceManager.stateChanged()
                 }
-                serviceManager.state.service3Used.isEmpty() -> {
+                serviceManager.getActorState().service3Used.isEmpty() -> {
                     type = ListService3::class.java
-                    serviceManager.state.service3Used = appWidgetId.toString()
+                    serviceManager.getActorState().service3Used = appWidgetId.toString()
                     serviceManager.stateChanged()
                 }
-                serviceManager.state.service4Used.isEmpty() -> {
+                serviceManager.getActorState().service4Used.isEmpty() -> {
                     type = ListService4::class.java
-                    serviceManager.state.service4Used = appWidgetId.toString()
+                    serviceManager.getActorState().service4Used = appWidgetId.toString()
                     serviceManager.stateChanged()
                 }
             }

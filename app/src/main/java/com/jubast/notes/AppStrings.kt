@@ -18,6 +18,10 @@ enum class AppStrings {
         override val noteUpdated = "Note successfully updated!"
         override val yourNotes = "Your notes:"
         override val language = "Set the language:"
+        override val export = "Copy Notes as Json to Clipboard:"
+        override val exportMsg = "COPY"
+        override val import = "Import Notes:"
+        override val importMsg = "IMPORT"
         override val restartApp = "Application restart?"
         override val restartAppMsg = "An application restart is needed!"
         override val yes = "Yes"
@@ -42,6 +46,10 @@ enum class AppStrings {
         override val noteUpdated = "Zapisek usprešno posodobljen!"
         override val yourNotes = "Tvoji zapiski:"
         override val language = "Nastavi jezik:"
+        override val export = "Kopiraj zapiske kot json v odložišče:"
+        override val exportMsg = "KOPIRAJ"
+        override val import = "Uvozi zapiske iz json:"
+        override val importMsg = "UVOZI"
         override val restartApp = "Ponovni zagon aplikacije?"
         override val restartAppMsg = "Ponovni zagon aplikacije je potreben!"
         override val yes = "Da"
@@ -66,6 +74,10 @@ enum class AppStrings {
     abstract val noteUpdated: String
     abstract val yourNotes: String
     abstract val language: String
+    abstract val export: String
+    abstract val exportMsg: String
+    abstract val import: String
+    abstract val importMsg: String
     abstract val restartApp: String
     abstract val restartAppMsg: String
     abstract val yes: String

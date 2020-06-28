@@ -45,7 +45,7 @@ class NoteActivity : AppCompatActivity() {
 
         if (_noteId != null) {
             val noteType = Note(_noteId as String, this)
-            twNoteTypeName.setText(noteType.state.text)
+            twNoteTypeName.setText(noteType.getActorState().text)
         }
     }
 

@@ -2,6 +2,7 @@ package com.jubast.notes.virtualactors
 
 import android.content.Context
 import com.jubast.notes.containers.NoteWidgetState
+import com.jubast.notes.virtualactors.abstract.StateActor
 import com.jubast.notes.virtualactors.exceptions.InvalidOperationException
 
 class NoteWidget(actorId: String, context: Context): StateActor<NoteWidgetState>(actorId, context, ::NoteWidgetState) {

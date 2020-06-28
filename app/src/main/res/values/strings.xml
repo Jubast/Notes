@@ -3,6 +3,7 @@
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="example">EXAMPLE</string>
+    <string name="paste_import_here">Paste JSON notes here:</string>
     <!-- Not used cuz custom class for strings
     <string name="add">ADD</string>
     <string name="edit">EDIT</string>

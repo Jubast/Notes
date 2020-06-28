@@ -32,7 +32,7 @@ class NoteTypeNameActivity : AppCompatActivity() {
             btnAdd.text = _appStrings.add
         }
         else{
-            twNoteTypeName.setText(NoteType(_noteTypeId as String, this).state.name)
+            twNoteTypeName.setText(NoteType(_noteTypeId as String, this).getActorState().name)
             btnAdd.text = _appStrings.save
         }
 

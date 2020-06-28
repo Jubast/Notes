@@ -3,6 +3,7 @@ package com.jubast.notes.virtualactors
 import android.content.Context
 import com.jubast.notes.AppStrings
 import com.jubast.notes.containers.AppLanguageState
+import com.jubast.notes.virtualactors.abstract.StateActor
 
 class AppLanguage(context: Context) : StateActor<AppLanguageState>(".", context, ::AppLanguageState) {
     fun setLanguage(lang: String){

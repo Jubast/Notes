@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.widget.RemoteViews
 import com.jubast.notes.activities.NoteTypeActivity
+import com.jubast.notes.activities.redirect.*
 import com.jubast.notes.virtualactors.*
 
 /**
@@ -86,63 +87,63 @@ class NotesWidgetProvider : AppWidgetProvider() {
             return
         }
 
-        val noteType = NoteType(noteTypeId, context)
-
-        views.setTextViewText(R.id.twNoteTypeName, noteType.getActorState().name)
-
-        // OnClick for Opening the Application
-        val appIntent = Intent(context, NoteTypeActivity::class.java)
-        appIntent.putExtra(NoteSettings.NOTE_TYPE_ID, noteTypeId)
-        val pendingIntent = PendingIntent.getActivity(context, 0, appIntent, 0)
-        views.setOnClickPendingIntent(R.id.twNoteTypeName, pendingIntent)
-
         // HACK
-        var type : Class<*>? = null
+        var serviceType : Class<*>? = null
+        var activityType : Class<*>? = null
         val serviceManager = ServiceManager(context)
         // if appWidgetId exists
         when(appWidgetId.toString()){
             serviceManager.getActorState().service1Used -> {
-                type = ListService1::class.java
+                serviceType = ListService1::class.java
+                activityType = RedirectActivity1::class.java
             }
             serviceManager.getActorState().service2Used -> {
-                type = ListService2::class.java
+                serviceType = ListService2::class.java
+                activityType = RedirectActivity2::class.java
             }
             serviceManager.getActorState().service3Used -> {
-                type = ListService3::class.java
+                serviceType = ListService3::class.java
+                activityType = RedirectActivity3::class.java
             }
             serviceManager.getActorState().service4Used -> {
-                type = ListService4::class.java
+                serviceType = ListService4::class.java
+                activityType = RedirectActivity4::class.java
             }
         }
 
+        val noteType = NoteType(noteTypeId, context)
+        views.setTextViewText(R.id.twNoteTypeName, noteType.getActorState().name)
+
+        // OnClick for Opening the Application
+        val appIntent = Intent(context, activityType)
+        appIntent.putExtra(NoteSettings.NOTE_TYPE_ID, noteTypeId)
+        val pendingIntent = PendingIntent.getActivity(context, 0, appIntent, 0)
+        views.setOnClickPendingIntent(R.id.twNoteTypeName, pendingIntent)
+
         // add new appWidgetId
-        if(type == null){
+        if(serviceType == null){
             when{
                 serviceManager.getActorState().service1Used.isEmpty() -> {
-                    type = ListService1::class.java
-                    serviceManager.getActorState().service1Used = appWidgetId.toString()
-                    serviceManager.stateChanged()
+                    serviceType = ListService1::class.java
+                    serviceManager.setServiceUsed(1, appWidgetId.toString())
                 }
                 serviceManager.getActorState().service2Used.isEmpty() -> {
-                    type = ListService2::class.java
-                    serviceManager.getActorState().service2Used = appWidgetId.toString()
-                    serviceManager.stateChanged()
+                    serviceType = ListService2::class.java
+                    serviceManager.setServiceUsed(2, appWidgetId.toString())
                 }
                 serviceManager.getActorState().service3Used.isEmpty() -> {
-                    type = ListService3::class.java
-                    serviceManager.getActorState().service3Used = appWidgetId.toString()
-                    serviceManager.stateChanged()
+                    serviceType = ListService3::class.java
+                    serviceManager.setServiceUsed(3, appWidgetId.toString())
                 }
                 serviceManager.getActorState().service4Used.isEmpty() -> {
-                    type = ListService4::class.java
-                    serviceManager.getActorState().service4Used = appWidgetId.toString()
-                    serviceManager.stateChanged()
+                    serviceType = ListService4::class.java
+                    serviceManager.setServiceUsed(4, appWidgetId.toString())
                 }
             }
         }
 
         // Activate ListView
-        val intent = Intent(context, type)
+        val intent = Intent(context, serviceType)
         intent.putExtra(NoteSettings.NOTE_TYPE_ID, noteTypeId)
         views.setRemoteAdapter(R.id.notesListView, intent)
 

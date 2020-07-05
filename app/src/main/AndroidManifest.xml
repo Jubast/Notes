@@ -12,7 +12,6 @@
         android:theme="@style/Jubast.Theme.Notes.Base"
         tools:ignore="GoogleAppIndexingWarning">
         <!-- Activities -->
-
         <activity
             android:name=".activities.MainActivity"
             android:screenOrientation="portrait"
@@ -23,15 +22,33 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activities.SettingsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.NoteTypeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.NoteTypeNameActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.NoteActivity"
+            android:screenOrientation="portrait" />
 
-        <activity android:name=".activities.SettingsActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activities.NoteTypeActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activities.NoteTypeNameActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activities.NoteActivity"
-            android:screenOrientation="portrait"/>
+        <!-- Proxy Activities -->
+        <activity
+            android:name=".activities.redirect.RedirectActivity1"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.redirect.RedirectActivity2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.redirect.RedirectActivity3"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.redirect.RedirectActivity4"
+            android:screenOrientation="portrait" />
+
         <receiver android:name=".NotesWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

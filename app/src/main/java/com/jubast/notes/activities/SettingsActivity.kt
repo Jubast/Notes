@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter
 import com.jubast.notes.AppStrings
 import com.jubast.notes.R
 import com.jubast.notes.virtualactors.AppLanguage
+import com.jubast.notes.virtualactors.ExportManager
 import com.jubast.notes.virtualactors.NoteTypeManager
 import kotlinx.android.synthetic.main.activity_settings.*
 
@@ -115,7 +116,7 @@ class SettingsActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
         sLanguage.onItemSelectedListener = this
 
         btnExport.setOnClickListener {
-            val manager = NoteTypeManager(this)
+            val manager = ExportManager(this)
             val json = manager.exportJson()
 
             val clipboardManager =  getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager;
@@ -126,7 +127,7 @@ class SettingsActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener
         btnImport.setOnClickListener {
             val json = twNotesImport.text.toString()
 
-            val manager = NoteTypeManager(this)
+            val manager = ExportManager(this)
             manager.importJson(json)
         }
     }

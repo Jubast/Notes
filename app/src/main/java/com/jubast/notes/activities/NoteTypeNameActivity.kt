@@ -48,7 +48,7 @@ class NoteTypeNameActivity : AppCompatActivity() {
             }
 
             if(_noteTypeId == null){
-                _noteTypeId = NoteTypeManager(this).addNoteType(twNoteTypeName.text.toString())
+                _noteTypeId = NoteTypeManager(this).createNoteType(twNoteTypeName.text.toString())
             }else{
                 NoteType(_noteTypeId as String, this).setNoteTypeName(twNoteTypeName.text.toString())
             }

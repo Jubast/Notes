@@ -27,7 +27,14 @@ class ServiceManager(context: Context): StateActor<ServiceManagerState>(".", con
         saveState()
     }
 
-    fun stateChanged(){
+    fun setServiceUsed(index: Int, appWidgetId: String) {
+        when (index) {
+            1 -> state.service1Used = appWidgetId
+            2 -> state.service2Used = appWidgetId
+            3 -> state.service3Used = appWidgetId
+            4 -> state.service4Used = appWidgetId
+        }
+
         saveState()
     }
 }

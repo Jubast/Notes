@@ -114,11 +114,13 @@ class NotesWidgetProvider : AppWidgetProvider() {
         val noteType = NoteType(noteTypeId, context)
         views.setTextViewText(R.id.twNoteTypeName, noteType.getActorState().name)
 
-        // OnClick for Opening the Application
-        val appIntent = Intent(context, activityType)
-        appIntent.putExtra(NoteSettings.NOTE_TYPE_ID, noteTypeId)
-        val pendingIntent = PendingIntent.getActivity(context, 0, appIntent, 0)
-        views.setOnClickPendingIntent(R.id.twNoteTypeName, pendingIntent)
+        if(activityType != null) {
+            // OnClick for Opening the Application
+            val appIntent = Intent(context, activityType)
+            appIntent.putExtra(NoteSettings.NOTE_TYPE_ID, noteTypeId)
+            val pendingIntent = PendingIntent.getActivity(context, 0, appIntent, 0)
+            views.setOnClickPendingIntent(R.id.twNoteTypeName, pendingIntent)
+        }
 
         // add new appWidgetId
         if(serviceType == null){
